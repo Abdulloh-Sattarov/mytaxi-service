@@ -21,7 +21,8 @@ CREATE TABLE IF NOT EXISTS clients(
 
 CREATE TABLE IF NOT EXISTS orders (
     id uuid not null primary key,
-    cost decimal(10,5),
+    status varchar(16),
+    cost decimal(10,3),
     driver_id uuid not null references drivers(id),
     client_id uuid not null references clients(id),
     created_at timestamp,

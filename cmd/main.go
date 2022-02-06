@@ -11,12 +11,14 @@ import (
 	"github.com/abdullohsattorov/mytaxi-service/pkg/logger"
 	"github.com/abdullohsattorov/mytaxi-service/service"
 	"github.com/abdullohsattorov/mytaxi-service/storage"
+
+	"google.golang.org/grpc/reflection"
 )
 
 func main() {
 	cfg := config.Load()
 
-	log := logger.New(cfg.LogLevel, "template-service")
+	log := logger.New(cfg.LogLevel, "myTaxi-service")
 	defer func(l logger.Logger) {
 		err := logger.Cleanup(l)
 		if err != nil {
@@ -36,7 +38,7 @@ func main() {
 
 	pgStorage := storage.NewStoragePg(connDB)
 
-	taxiService := service.NewTaxiService(pgStorage, log)
+	taxiService := service.NewMyTaxiService(pgStorage, log)
 
 	lis, err := net.Listen("tcp", cfg.RPCPort)
 	if err != nil {
@@ -44,7 +46,8 @@ func main() {
 	}
 
 	s := grpc.NewServer()
-	pb.RegisterTaxiServiceServer(s, taxiService)
+	pb.RegisterMyTaxiServiceServer(s, taxiService)
+	reflection.Register(s)
 	log.Info("main: server running",
 		logger.String("port", cfg.RPCPort))
 

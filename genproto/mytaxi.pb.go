@@ -27,24 +27,24 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
-type EmptyResponse struct {
+type EmptyResp struct {
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *EmptyResponse) Reset()         { *m = EmptyResponse{} }
-func (m *EmptyResponse) String() string { return proto.CompactTextString(m) }
-func (*EmptyResponse) ProtoMessage()    {}
-func (*EmptyResponse) Descriptor() ([]byte, []int) {
+func (m *EmptyResp) Reset()         { *m = EmptyResp{} }
+func (m *EmptyResp) String() string { return proto.CompactTextString(m) }
+func (*EmptyResp) ProtoMessage()    {}
+func (*EmptyResp) Descriptor() ([]byte, []int) {
 	return fileDescriptor_a8586c90b3690638, []int{0}
 }
-func (m *EmptyResponse) XXX_Unmarshal(b []byte) error {
+func (m *EmptyResp) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *EmptyResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *EmptyResp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_EmptyResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_EmptyResp.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -54,17 +54,17 @@ func (m *EmptyResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error
 		return b[:n], nil
 	}
 }
-func (m *EmptyResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_EmptyResponse.Merge(m, src)
+func (m *EmptyResp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_EmptyResp.Merge(m, src)
 }
-func (m *EmptyResponse) XXX_Size() int {
+func (m *EmptyResp) XXX_Size() int {
 	return m.Size()
 }
-func (m *EmptyResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_EmptyResponse.DiscardUnknown(m)
+func (m *EmptyResp) XXX_DiscardUnknown() {
+	xxx_messageInfo_EmptyResp.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_EmptyResponse proto.InternalMessageInfo
+var xxx_messageInfo_EmptyResp proto.InternalMessageInfo
 
 type Driver struct {
 	Id                   string   `protobuf:"bytes,1,opt,name=Id,proto3" json:"Id"`
@@ -72,6 +72,8 @@ type Driver struct {
 	LastName             string   `protobuf:"bytes,3,opt,name=LastName,proto3" json:"LastName"`
 	Phone                string   `protobuf:"bytes,4,opt,name=Phone,proto3" json:"Phone"`
 	CarModel             string   `protobuf:"bytes,5,opt,name=CarModel,proto3" json:"CarModel"`
+	CreatedAt            string   `protobuf:"bytes,6,opt,name=CreatedAt,proto3" json:"CreatedAt"`
+	UpdatedAt            string   `protobuf:"bytes,7,opt,name=UpdatedAt,proto3" json:"UpdatedAt"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -145,11 +147,27 @@ func (m *Driver) GetCarModel() string {
 	return ""
 }
 
+func (m *Driver) GetCreatedAt() string {
+	if m != nil {
+		return m.CreatedAt
+	}
+	return ""
+}
+
+func (m *Driver) GetUpdatedAt() string {
+	if m != nil {
+		return m.UpdatedAt
+	}
+	return ""
+}
+
 type Client struct {
 	Id                   string   `protobuf:"bytes,1,opt,name=Id,proto3" json:"Id"`
 	FirstName            string   `protobuf:"bytes,2,opt,name=FirstName,proto3" json:"FirstName"`
 	LastName             string   `protobuf:"bytes,3,opt,name=LastName,proto3" json:"LastName"`
 	Phone                string   `protobuf:"bytes,5,opt,name=Phone,proto3" json:"Phone"`
+	CreatedAt            string   `protobuf:"bytes,6,opt,name=CreatedAt,proto3" json:"CreatedAt"`
+	UpdatedAt            string   `protobuf:"bytes,7,opt,name=UpdatedAt,proto3" json:"UpdatedAt"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -216,11 +234,26 @@ func (m *Client) GetPhone() string {
 	return ""
 }
 
+func (m *Client) GetCreatedAt() string {
+	if m != nil {
+		return m.CreatedAt
+	}
+	return ""
+}
+
+func (m *Client) GetUpdatedAt() string {
+	if m != nil {
+		return m.UpdatedAt
+	}
+	return ""
+}
+
 type OrderReq struct {
 	Id                   string   `protobuf:"bytes,1,opt,name=Id,proto3" json:"Id"`
 	Cost                 float32  `protobuf:"fixed32,2,opt,name=Cost,proto3" json:"Cost"`
-	ClientId             string   `protobuf:"bytes,3,opt,name=ClientId,proto3" json:"ClientId"`
-	DriverId             string   `protobuf:"bytes,4,opt,name=DriverId,proto3" json:"DriverId"`
+	Status               string   `protobuf:"bytes,3,opt,name=Status,proto3" json:"Status"`
+	ClientId             string   `protobuf:"bytes,4,opt,name=ClientId,proto3" json:"ClientId"`
+	DriverId             string   `protobuf:"bytes,5,opt,name=DriverId,proto3" json:"DriverId"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -273,6 +306,13 @@ func (m *OrderReq) GetCost() float32 {
 	return 0
 }
 
+func (m *OrderReq) GetStatus() string {
+	if m != nil {
+		return m.Status
+	}
+	return ""
+}
+
 func (m *OrderReq) GetClientId() string {
 	if m != nil {
 		return m.ClientId
@@ -290,8 +330,11 @@ func (m *OrderReq) GetDriverId() string {
 type OrderRes struct {
 	Id                   string   `protobuf:"bytes,1,opt,name=Id,proto3" json:"Id"`
 	Cost                 float32  `protobuf:"fixed32,2,opt,name=Cost,proto3" json:"Cost"`
-	Client               *Client  `protobuf:"bytes,3,opt,name=Client,proto3" json:"Client"`
-	Driver               *Driver  `protobuf:"bytes,4,opt,name=Driver,proto3" json:"Driver"`
+	Status               string   `protobuf:"bytes,3,opt,name=Status,proto3" json:"Status"`
+	Client               *Client  `protobuf:"bytes,4,opt,name=Client,proto3" json:"Client"`
+	Driver               *Driver  `protobuf:"bytes,5,opt,name=Driver,proto3" json:"Driver"`
+	CreatedAt            string   `protobuf:"bytes,6,opt,name=CreatedAt,proto3" json:"CreatedAt"`
+	UpdatedAt            string   `protobuf:"bytes,7,opt,name=UpdatedAt,proto3" json:"UpdatedAt"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -344,6 +387,13 @@ func (m *OrderRes) GetCost() float32 {
 	return 0
 }
 
+func (m *OrderRes) GetStatus() string {
+	if m != nil {
+		return m.Status
+	}
+	return ""
+}
+
 func (m *OrderRes) GetClient() *Client {
 	if m != nil {
 		return m.Client
@@ -356,6 +406,20 @@ func (m *OrderRes) GetDriver() *Driver {
 		return m.Driver
 	}
 	return nil
+}
+
+func (m *OrderRes) GetCreatedAt() string {
+	if m != nil {
+		return m.CreatedAt
+	}
+	return ""
+}
+
+func (m *OrderRes) GetUpdatedAt() string {
+	if m != nil {
+		return m.UpdatedAt
+	}
+	return ""
 }
 
 type ByIdReq struct {
@@ -524,7 +588,7 @@ func (m *ListOrdersRes) GetCount() int64 {
 }
 
 func init() {
-	proto.RegisterType((*EmptyResponse)(nil), "mytaxi.EmptyResponse")
+	proto.RegisterType((*EmptyResp)(nil), "mytaxi.EmptyResp")
 	proto.RegisterType((*Driver)(nil), "mytaxi.Driver")
 	proto.RegisterType((*Client)(nil), "mytaxi.Client")
 	proto.RegisterType((*OrderReq)(nil), "mytaxi.OrderReq")
@@ -537,39 +601,42 @@ func init() {
 func init() { proto.RegisterFile("mytaxi.proto", fileDescriptor_a8586c90b3690638) }
 
 var fileDescriptor_a8586c90b3690638 = []byte{
-	// 510 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x54, 0xcd, 0x6e, 0xd3, 0x40,
-	0x10, 0xc6, 0xf9, 0x31, 0xc9, 0x24, 0x69, 0xab, 0x15, 0x48, 0xc6, 0x42, 0x51, 0xe5, 0x43, 0x95,
-	0x03, 0x44, 0x22, 0x08, 0x0e, 0x1c, 0xeb, 0x42, 0x65, 0xa9, 0xa5, 0x68, 0xa1, 0x0f, 0x60, 0xf0,
-	0x40, 0x57, 0x4a, 0x62, 0x77, 0x77, 0xa9, 0x92, 0x0b, 0x27, 0x1e, 0x82, 0x3b, 0x2f, 0xc3, 0x91,
-	0x47, 0x40, 0xe1, 0x45, 0x90, 0xf7, 0xc7, 0x89, 0xe3, 0x44, 0xf2, 0x85, 0x9b, 0xbf, 0x99, 0xd9,
-	0xfd, 0x7e, 0x66, 0x13, 0xe8, 0xcf, 0x96, 0x32, 0x5e, 0xb0, 0x71, 0xc6, 0x53, 0x99, 0x12, 0x57,
-	0xa3, 0xe0, 0x10, 0x06, 0xaf, 0x67, 0x99, 0x5c, 0x52, 0x14, 0x59, 0x3a, 0x17, 0x18, 0x7c, 0x77,
-	0xc0, 0x3d, 0xe3, 0xec, 0x0e, 0x39, 0x39, 0x80, 0x46, 0x94, 0x78, 0xce, 0xb1, 0x33, 0xea, 0xd2,
-	0x46, 0x94, 0x90, 0xc7, 0xd0, 0x7d, 0xc3, 0xb8, 0x90, 0x6f, 0xe3, 0x19, 0x7a, 0x0d, 0x55, 0x5e,
-	0x17, 0x88, 0x0f, 0x9d, 0x8b, 0xd8, 0x34, 0x9b, 0xaa, 0x59, 0x60, 0xf2, 0x00, 0xda, 0xef, 0x6e,
-	0xd2, 0x39, 0x7a, 0x2d, 0xd5, 0xd0, 0x20, 0x3f, 0x11, 0xc6, 0xfc, 0x32, 0x4d, 0x70, 0xea, 0xb5,
-	0xf5, 0x09, 0x8b, 0x83, 0x1b, 0x70, 0xc3, 0x29, 0xc3, 0xb9, 0xfc, 0x1f, 0x2a, 0xda, 0x1b, 0x2a,
-	0x82, 0xcf, 0xd0, 0xb9, 0xe2, 0x09, 0x72, 0x8a, 0xb7, 0x15, 0x2e, 0x02, 0xad, 0x30, 0x15, 0x52,
-	0xd1, 0x34, 0xa8, 0xfa, 0x56, 0xaa, 0x95, 0xb2, 0x28, 0xb1, 0x0c, 0x16, 0xe7, 0x3d, 0x9d, 0x5d,
-	0x94, 0x18, 0xab, 0x05, 0x0e, 0xbe, 0x15, 0x3c, 0xa2, 0x16, 0xcf, 0x89, 0x4d, 0x40, 0xb1, 0xf4,
-	0x26, 0x07, 0x63, 0xb3, 0x40, 0x5d, 0xa5, 0x36, 0x9f, 0x13, 0xbb, 0x2f, 0xc5, 0xb8, 0x31, 0xa7,
-	0xab, 0xd4, 0x74, 0x83, 0x47, 0x70, 0xff, 0x74, 0x19, 0x25, 0x3b, 0x6c, 0x06, 0xd7, 0x30, 0xb8,
-	0x60, 0x42, 0x2a, 0x79, 0x22, 0x1f, 0xd8, 0xf4, 0xe8, 0x6c, 0x79, 0x24, 0xd0, 0xca, 0xe2, 0x2f,
-	0x3a, 0xfa, 0x26, 0x55, 0xdf, 0x79, 0xb2, 0x53, 0x36, 0x63, 0x5a, 0x6a, 0x93, 0x6a, 0x10, 0x5c,
-	0x95, 0xaf, 0x15, 0x64, 0x04, 0xae, 0x06, 0x9e, 0x73, 0xdc, 0x1c, 0xf5, 0x26, 0x47, 0x56, 0xaa,
-	0x0d, 0x86, 0x9a, 0x7e, 0x7e, 0x61, 0x98, 0x7e, 0x9d, 0x4b, 0xc3, 0xa2, 0xc1, 0xe4, 0x67, 0x1b,
-	0x06, 0x97, 0xcb, 0x0f, 0xf1, 0x82, 0xbd, 0x47, 0x7e, 0xc7, 0x3e, 0x21, 0x19, 0x43, 0x3f, 0xe4,
-	0x18, 0x4b, 0xb4, 0x4f, 0xb6, 0x6c, 0xde, 0xdf, 0xc2, 0xe4, 0x09, 0x74, 0xcf, 0x51, 0x1a, 0x70,
-	0x68, 0x9b, 0x26, 0x97, 0xca, 0xf4, 0x18, 0xfa, 0xd7, 0x59, 0x52, 0xff, 0xf6, 0x97, 0xd0, 0x3f,
-	0xc3, 0x29, 0x16, 0xf3, 0x15, 0x82, 0x87, 0xb6, 0x50, 0xfa, 0xcd, 0xad, 0x5d, 0xd8, 0x27, 0x5f,
-	0x5e, 0xb5, 0xbf, 0x85, 0x8d, 0x0b, 0x03, 0xf6, 0xbb, 0x30, 0x03, 0x85, 0x8b, 0x9a, 0xb7, 0x17,
-	0x2e, 0xf6, 0x11, 0xec, 0x71, 0xf1, 0x0c, 0x7a, 0xda, 0x85, 0xda, 0x21, 0xd9, 0x5e, 0xee, 0xad,
-	0x5f, 0x59, 0x37, 0x79, 0x0a, 0x9d, 0x73, 0xd4, 0x0f, 0xa4, 0x4a, 0x53, 0x1d, 0x7f, 0x05, 0xb0,
-	0x7e, 0x50, 0xa4, 0x90, 0x51, 0x7a, 0xbb, 0xfe, 0xce, 0xb2, 0xc8, 0xd5, 0xe9, 0x14, 0xea, 0xab,
-	0x7b, 0x01, 0x3d, 0x1d, 0xc4, 0x1e, 0x81, 0xbb, 0x73, 0x38, 0x3d, 0xfa, 0xb5, 0x1a, 0x3a, 0xbf,
-	0x57, 0x43, 0xe7, 0xcf, 0x6a, 0xe8, 0xfc, 0xf8, 0x3b, 0xbc, 0xf7, 0xd1, 0x55, 0xff, 0xb9, 0xcf,
-	0xff, 0x05, 0x00, 0x00, 0xff, 0xff, 0x84, 0x75, 0xb8, 0x7b, 0x83, 0x05, 0x00, 0x00,
+	// 551 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x55, 0xcb, 0x6e, 0xd3, 0x40,
+	0x14, 0x65, 0xf2, 0x70, 0x93, 0xeb, 0xb4, 0x94, 0x11, 0x20, 0x63, 0xa1, 0xa8, 0xf2, 0xa2, 0xca,
+	0x02, 0x22, 0x35, 0xec, 0xd8, 0x51, 0x17, 0x2a, 0x4b, 0x2d, 0x45, 0x2e, 0xfd, 0x00, 0x83, 0x47,
+	0x60, 0x29, 0x89, 0xdd, 0x99, 0x69, 0xd5, 0x6c, 0xf8, 0x0d, 0xf8, 0x00, 0x3e, 0x84, 0x25, 0x4b,
+	0xc4, 0x17, 0xa0, 0xf0, 0x23, 0xc8, 0x73, 0x67, 0x26, 0x0f, 0x27, 0x52, 0xa4, 0x88, 0x9d, 0xcf,
+	0x3d, 0xd7, 0x73, 0xcf, 0x39, 0x73, 0x9d, 0x40, 0x67, 0x34, 0x91, 0xc9, 0x5d, 0xd6, 0x2f, 0x78,
+	0x2e, 0x73, 0xea, 0x20, 0x0a, 0x5c, 0x68, 0xbf, 0x1e, 0x15, 0x72, 0x12, 0x33, 0x51, 0x04, 0x3f,
+	0x08, 0x38, 0x27, 0x3c, 0xbb, 0x65, 0x9c, 0xee, 0x41, 0x2d, 0x4a, 0x3d, 0x72, 0x40, 0x7a, 0xed,
+	0xb8, 0x16, 0xa5, 0xf4, 0x29, 0xb4, 0xdf, 0x64, 0x5c, 0xc8, 0xb7, 0xc9, 0x88, 0x79, 0x35, 0x55,
+	0x9e, 0x15, 0xa8, 0x0f, 0xad, 0xb3, 0x44, 0x93, 0x75, 0x45, 0x5a, 0x4c, 0x1f, 0x42, 0xf3, 0xdd,
+	0xe7, 0x7c, 0xcc, 0xbc, 0x86, 0x22, 0x10, 0x94, 0x6f, 0x84, 0x09, 0x3f, 0xcf, 0x53, 0x36, 0xf4,
+	0x9a, 0xf8, 0x86, 0xc1, 0xe5, 0xac, 0x90, 0xb3, 0x44, 0xb2, 0xf4, 0x95, 0xf4, 0x1c, 0x9c, 0x65,
+	0x0b, 0x25, 0x7b, 0x55, 0xa4, 0x9a, 0xdd, 0x41, 0xd6, 0x16, 0x82, 0xef, 0x04, 0x9c, 0x70, 0x98,
+	0xb1, 0xb1, 0xfc, 0x1f, 0x16, 0x9a, 0xf3, 0x16, 0xb6, 0x91, 0xf9, 0x05, 0x5a, 0x17, 0x3c, 0x65,
+	0x3c, 0x66, 0xd7, 0x15, 0x9d, 0x14, 0x1a, 0x61, 0x2e, 0xa4, 0x92, 0x58, 0x8b, 0xd5, 0x33, 0x7d,
+	0x0c, 0xce, 0xa5, 0x4c, 0xe4, 0x8d, 0xd0, 0xda, 0x34, 0x52, 0x31, 0x2a, 0xb7, 0x51, 0xaa, 0xf3,
+	0xb5, 0xb8, 0xe4, 0xf0, 0x32, 0xa3, 0xd4, 0x44, 0x6c, 0x70, 0xf0, 0x9b, 0x58, 0x01, 0x62, 0x2b,
+	0x01, 0x87, 0x26, 0x6e, 0x35, 0xde, 0x1d, 0xec, 0xf5, 0xf5, 0x9a, 0x61, 0x35, 0x36, 0x97, 0x71,
+	0x68, 0x36, 0x4b, 0x49, 0x99, 0xeb, 0xc3, 0x6a, 0x6c, 0xf6, 0x6e, 0x9b, 0x50, 0x9f, 0xc0, 0xce,
+	0xf1, 0x24, 0x4a, 0x57, 0x64, 0x1a, 0x5c, 0xc1, 0xee, 0x59, 0x26, 0xa4, 0xb2, 0x2c, 0xca, 0x86,
+	0xf9, 0xe0, 0xc8, 0x52, 0x70, 0x14, 0x1a, 0x45, 0xf2, 0x09, 0x77, 0xa4, 0x1e, 0xab, 0xe7, 0x72,
+	0x05, 0x86, 0xd9, 0x28, 0x93, 0xca, 0x7e, 0x3d, 0x46, 0x10, 0x5c, 0x2c, 0x1e, 0x2b, 0x68, 0x0f,
+	0x1c, 0x04, 0x1e, 0x39, 0xa8, 0xf7, 0xdc, 0xc1, 0xbe, 0xb1, 0x69, 0xc2, 0x8e, 0x35, 0x5f, 0x1e,
+	0x18, 0xe6, 0x37, 0x63, 0xa9, 0xa7, 0x20, 0x18, 0x7c, 0x6d, 0xc2, 0xee, 0xf9, 0xe4, 0x7d, 0x72,
+	0x97, 0x5d, 0x32, 0x7e, 0x9b, 0x7d, 0x64, 0xb4, 0x0f, 0x1d, 0xf4, 0x6f, 0x3e, 0xcc, 0xc5, 0xe0,
+	0xfc, 0x25, 0x4c, 0x9f, 0x41, 0xfb, 0x94, 0x49, 0x0d, 0xee, 0x1b, 0x52, 0xe7, 0x52, 0xe9, 0xee,
+	0x43, 0x07, 0xf3, 0xdb, 0xf0, 0xf4, 0x01, 0x74, 0x4e, 0xd8, 0x90, 0xd9, 0xfe, 0xca, 0x80, 0x07,
+	0xa6, 0x60, 0x7f, 0x55, 0x66, 0x0e, 0xcc, 0x77, 0xb9, 0xb8, 0x22, 0xfe, 0x12, 0xd6, 0x0e, 0x34,
+	0x58, 0xef, 0x40, 0x37, 0x58, 0x07, 0x1b, 0x9e, 0x6e, 0x1d, 0xac, 0x1b, 0xb0, 0xc2, 0xc1, 0x11,
+	0xb8, 0xe8, 0x40, 0xdd, 0x1d, 0x5d, 0xbe, 0xd4, 0x6b, 0xbf, 0x72, 0xcd, 0xf4, 0x39, 0xb4, 0x4e,
+	0x19, 0x2e, 0x46, 0x75, 0x44, 0xb5, 0xfd, 0x25, 0xc0, 0x6c, 0x91, 0xe8, 0x23, 0xc3, 0x2f, 0xec,
+	0xac, 0xbf, 0xb2, 0x2c, 0x4a, 0x75, 0x98, 0xc0, 0xe6, 0xea, 0x8e, 0xc0, 0xc5, 0x10, 0xd6, 0x08,
+	0xac, 0x66, 0x70, 0xbc, 0xff, 0x73, 0xda, 0x25, 0xbf, 0xa6, 0x5d, 0xf2, 0x67, 0xda, 0x25, 0xdf,
+	0xfe, 0x76, 0xef, 0x7d, 0x70, 0xd4, 0x3f, 0xc9, 0x8b, 0x7f, 0x01, 0x00, 0x00, 0xff, 0xff, 0x6e,
+	0x17, 0x7b, 0x1b, 0x59, 0x06, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -587,16 +654,16 @@ type MyTaxiServiceClient interface {
 	CreateDriver(ctx context.Context, in *Driver, opts ...grpc.CallOption) (*Driver, error)
 	GetDriver(ctx context.Context, in *ByIdReq, opts ...grpc.CallOption) (*Driver, error)
 	UpdateDriver(ctx context.Context, in *Driver, opts ...grpc.CallOption) (*Driver, error)
-	DeleteDriver(ctx context.Context, in *ByIdReq, opts ...grpc.CallOption) (*EmptyResponse, error)
+	DeleteDriver(ctx context.Context, in *ByIdReq, opts ...grpc.CallOption) (*EmptyResp, error)
 	CreateClient(ctx context.Context, in *Client, opts ...grpc.CallOption) (*Client, error)
 	GetClient(ctx context.Context, in *ByIdReq, opts ...grpc.CallOption) (*Client, error)
 	UpdateClient(ctx context.Context, in *Client, opts ...grpc.CallOption) (*Client, error)
-	DeleteClient(ctx context.Context, in *ByIdReq, opts ...grpc.CallOption) (*EmptyResponse, error)
+	DeleteClient(ctx context.Context, in *ByIdReq, opts ...grpc.CallOption) (*EmptyResp, error)
 	CreateOrder(ctx context.Context, in *OrderReq, opts ...grpc.CallOption) (*OrderRes, error)
 	GetOrder(ctx context.Context, in *ByIdReq, opts ...grpc.CallOption) (*OrderRes, error)
 	ListOrders(ctx context.Context, in *ListOrdersReq, opts ...grpc.CallOption) (*ListOrdersRes, error)
 	UpdateOrder(ctx context.Context, in *OrderReq, opts ...grpc.CallOption) (*OrderRes, error)
-	DeleteOrder(ctx context.Context, in *ByIdReq, opts ...grpc.CallOption) (*EmptyResponse, error)
+	DeleteOrder(ctx context.Context, in *ByIdReq, opts ...grpc.CallOption) (*EmptyResp, error)
 }
 
 type myTaxiServiceClient struct {
@@ -634,8 +701,8 @@ func (c *myTaxiServiceClient) UpdateDriver(ctx context.Context, in *Driver, opts
 	return out, nil
 }
 
-func (c *myTaxiServiceClient) DeleteDriver(ctx context.Context, in *ByIdReq, opts ...grpc.CallOption) (*EmptyResponse, error) {
-	out := new(EmptyResponse)
+func (c *myTaxiServiceClient) DeleteDriver(ctx context.Context, in *ByIdReq, opts ...grpc.CallOption) (*EmptyResp, error) {
+	out := new(EmptyResp)
 	err := c.cc.Invoke(ctx, "/mytaxi.MyTaxiService/DeleteDriver", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -670,8 +737,8 @@ func (c *myTaxiServiceClient) UpdateClient(ctx context.Context, in *Client, opts
 	return out, nil
 }
 
-func (c *myTaxiServiceClient) DeleteClient(ctx context.Context, in *ByIdReq, opts ...grpc.CallOption) (*EmptyResponse, error) {
-	out := new(EmptyResponse)
+func (c *myTaxiServiceClient) DeleteClient(ctx context.Context, in *ByIdReq, opts ...grpc.CallOption) (*EmptyResp, error) {
+	out := new(EmptyResp)
 	err := c.cc.Invoke(ctx, "/mytaxi.MyTaxiService/DeleteClient", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -715,8 +782,8 @@ func (c *myTaxiServiceClient) UpdateOrder(ctx context.Context, in *OrderReq, opt
 	return out, nil
 }
 
-func (c *myTaxiServiceClient) DeleteOrder(ctx context.Context, in *ByIdReq, opts ...grpc.CallOption) (*EmptyResponse, error) {
-	out := new(EmptyResponse)
+func (c *myTaxiServiceClient) DeleteOrder(ctx context.Context, in *ByIdReq, opts ...grpc.CallOption) (*EmptyResp, error) {
+	out := new(EmptyResp)
 	err := c.cc.Invoke(ctx, "/mytaxi.MyTaxiService/DeleteOrder", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -729,16 +796,16 @@ type MyTaxiServiceServer interface {
 	CreateDriver(context.Context, *Driver) (*Driver, error)
 	GetDriver(context.Context, *ByIdReq) (*Driver, error)
 	UpdateDriver(context.Context, *Driver) (*Driver, error)
-	DeleteDriver(context.Context, *ByIdReq) (*EmptyResponse, error)
+	DeleteDriver(context.Context, *ByIdReq) (*EmptyResp, error)
 	CreateClient(context.Context, *Client) (*Client, error)
 	GetClient(context.Context, *ByIdReq) (*Client, error)
 	UpdateClient(context.Context, *Client) (*Client, error)
-	DeleteClient(context.Context, *ByIdReq) (*EmptyResponse, error)
+	DeleteClient(context.Context, *ByIdReq) (*EmptyResp, error)
 	CreateOrder(context.Context, *OrderReq) (*OrderRes, error)
 	GetOrder(context.Context, *ByIdReq) (*OrderRes, error)
 	ListOrders(context.Context, *ListOrdersReq) (*ListOrdersRes, error)
 	UpdateOrder(context.Context, *OrderReq) (*OrderRes, error)
-	DeleteOrder(context.Context, *ByIdReq) (*EmptyResponse, error)
+	DeleteOrder(context.Context, *ByIdReq) (*EmptyResp, error)
 }
 
 // UnimplementedMyTaxiServiceServer can be embedded to have forward compatible implementations.
@@ -754,7 +821,7 @@ func (*UnimplementedMyTaxiServiceServer) GetDriver(ctx context.Context, req *ByI
 func (*UnimplementedMyTaxiServiceServer) UpdateDriver(ctx context.Context, req *Driver) (*Driver, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateDriver not implemented")
 }
-func (*UnimplementedMyTaxiServiceServer) DeleteDriver(ctx context.Context, req *ByIdReq) (*EmptyResponse, error) {
+func (*UnimplementedMyTaxiServiceServer) DeleteDriver(ctx context.Context, req *ByIdReq) (*EmptyResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteDriver not implemented")
 }
 func (*UnimplementedMyTaxiServiceServer) CreateClient(ctx context.Context, req *Client) (*Client, error) {
@@ -766,7 +833,7 @@ func (*UnimplementedMyTaxiServiceServer) GetClient(ctx context.Context, req *ByI
 func (*UnimplementedMyTaxiServiceServer) UpdateClient(ctx context.Context, req *Client) (*Client, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateClient not implemented")
 }
-func (*UnimplementedMyTaxiServiceServer) DeleteClient(ctx context.Context, req *ByIdReq) (*EmptyResponse, error) {
+func (*UnimplementedMyTaxiServiceServer) DeleteClient(ctx context.Context, req *ByIdReq) (*EmptyResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteClient not implemented")
 }
 func (*UnimplementedMyTaxiServiceServer) CreateOrder(ctx context.Context, req *OrderReq) (*OrderRes, error) {
@@ -781,7 +848,7 @@ func (*UnimplementedMyTaxiServiceServer) ListOrders(ctx context.Context, req *Li
 func (*UnimplementedMyTaxiServiceServer) UpdateOrder(ctx context.Context, req *OrderReq) (*OrderRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrder not implemented")
 }
-func (*UnimplementedMyTaxiServiceServer) DeleteOrder(ctx context.Context, req *ByIdReq) (*EmptyResponse, error) {
+func (*UnimplementedMyTaxiServiceServer) DeleteOrder(ctx context.Context, req *ByIdReq) (*EmptyResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteOrder not implemented")
 }
 
@@ -1084,7 +1151,7 @@ var _MyTaxiService_serviceDesc = grpc.ServiceDesc{
 	Metadata: "mytaxi.proto",
 }
 
-func (m *EmptyResponse) Marshal() (dAtA []byte, err error) {
+func (m *EmptyResp) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1094,12 +1161,12 @@ func (m *EmptyResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *EmptyResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *EmptyResp) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *EmptyResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *EmptyResp) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1134,6 +1201,20 @@ func (m *Driver) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	if m.XXX_unrecognized != nil {
 		i -= len(m.XXX_unrecognized)
 		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	if len(m.UpdatedAt) > 0 {
+		i -= len(m.UpdatedAt)
+		copy(dAtA[i:], m.UpdatedAt)
+		i = encodeVarintMytaxi(dAtA, i, uint64(len(m.UpdatedAt)))
+		i--
+		dAtA[i] = 0x3a
+	}
+	if len(m.CreatedAt) > 0 {
+		i -= len(m.CreatedAt)
+		copy(dAtA[i:], m.CreatedAt)
+		i = encodeVarintMytaxi(dAtA, i, uint64(len(m.CreatedAt)))
+		i--
+		dAtA[i] = 0x32
 	}
 	if len(m.CarModel) > 0 {
 		i -= len(m.CarModel)
@@ -1197,6 +1278,20 @@ func (m *Client) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		i -= len(m.XXX_unrecognized)
 		copy(dAtA[i:], m.XXX_unrecognized)
 	}
+	if len(m.UpdatedAt) > 0 {
+		i -= len(m.UpdatedAt)
+		copy(dAtA[i:], m.UpdatedAt)
+		i = encodeVarintMytaxi(dAtA, i, uint64(len(m.UpdatedAt)))
+		i--
+		dAtA[i] = 0x3a
+	}
+	if len(m.CreatedAt) > 0 {
+		i -= len(m.CreatedAt)
+		copy(dAtA[i:], m.CreatedAt)
+		i = encodeVarintMytaxi(dAtA, i, uint64(len(m.CreatedAt)))
+		i--
+		dAtA[i] = 0x32
+	}
 	if len(m.Phone) > 0 {
 		i -= len(m.Phone)
 		copy(dAtA[i:], m.Phone)
@@ -1257,12 +1352,19 @@ func (m *OrderReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		copy(dAtA[i:], m.DriverId)
 		i = encodeVarintMytaxi(dAtA, i, uint64(len(m.DriverId)))
 		i--
-		dAtA[i] = 0x22
+		dAtA[i] = 0x2a
 	}
 	if len(m.ClientId) > 0 {
 		i -= len(m.ClientId)
 		copy(dAtA[i:], m.ClientId)
 		i = encodeVarintMytaxi(dAtA, i, uint64(len(m.ClientId)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if len(m.Status) > 0 {
+		i -= len(m.Status)
+		copy(dAtA[i:], m.Status)
+		i = encodeVarintMytaxi(dAtA, i, uint64(len(m.Status)))
 		i--
 		dAtA[i] = 0x1a
 	}
@@ -1306,6 +1408,20 @@ func (m *OrderRes) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		i -= len(m.XXX_unrecognized)
 		copy(dAtA[i:], m.XXX_unrecognized)
 	}
+	if len(m.UpdatedAt) > 0 {
+		i -= len(m.UpdatedAt)
+		copy(dAtA[i:], m.UpdatedAt)
+		i = encodeVarintMytaxi(dAtA, i, uint64(len(m.UpdatedAt)))
+		i--
+		dAtA[i] = 0x3a
+	}
+	if len(m.CreatedAt) > 0 {
+		i -= len(m.CreatedAt)
+		copy(dAtA[i:], m.CreatedAt)
+		i = encodeVarintMytaxi(dAtA, i, uint64(len(m.CreatedAt)))
+		i--
+		dAtA[i] = 0x32
+	}
 	if m.Driver != nil {
 		{
 			size, err := m.Driver.MarshalToSizedBuffer(dAtA[:i])
@@ -1316,7 +1432,7 @@ func (m *OrderRes) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 			i = encodeVarintMytaxi(dAtA, i, uint64(size))
 		}
 		i--
-		dAtA[i] = 0x22
+		dAtA[i] = 0x2a
 	}
 	if m.Client != nil {
 		{
@@ -1327,6 +1443,13 @@ func (m *OrderRes) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 			i -= size
 			i = encodeVarintMytaxi(dAtA, i, uint64(size))
 		}
+		i--
+		dAtA[i] = 0x22
+	}
+	if len(m.Status) > 0 {
+		i -= len(m.Status)
+		copy(dAtA[i:], m.Status)
+		i = encodeVarintMytaxi(dAtA, i, uint64(len(m.Status)))
 		i--
 		dAtA[i] = 0x1a
 	}
@@ -1481,7 +1604,7 @@ func encodeVarintMytaxi(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
-func (m *EmptyResponse) Size() (n int) {
+func (m *EmptyResp) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1519,6 +1642,14 @@ func (m *Driver) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovMytaxi(uint64(l))
 	}
+	l = len(m.CreatedAt)
+	if l > 0 {
+		n += 1 + l + sovMytaxi(uint64(l))
+	}
+	l = len(m.UpdatedAt)
+	if l > 0 {
+		n += 1 + l + sovMytaxi(uint64(l))
+	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
 	}
@@ -1547,6 +1678,14 @@ func (m *Client) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovMytaxi(uint64(l))
 	}
+	l = len(m.CreatedAt)
+	if l > 0 {
+		n += 1 + l + sovMytaxi(uint64(l))
+	}
+	l = len(m.UpdatedAt)
+	if l > 0 {
+		n += 1 + l + sovMytaxi(uint64(l))
+	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
 	}
@@ -1565,6 +1704,10 @@ func (m *OrderReq) Size() (n int) {
 	}
 	if m.Cost != 0 {
 		n += 5
+	}
+	l = len(m.Status)
+	if l > 0 {
+		n += 1 + l + sovMytaxi(uint64(l))
 	}
 	l = len(m.ClientId)
 	if l > 0 {
@@ -1593,12 +1736,24 @@ func (m *OrderRes) Size() (n int) {
 	if m.Cost != 0 {
 		n += 5
 	}
+	l = len(m.Status)
+	if l > 0 {
+		n += 1 + l + sovMytaxi(uint64(l))
+	}
 	if m.Client != nil {
 		l = m.Client.Size()
 		n += 1 + l + sovMytaxi(uint64(l))
 	}
 	if m.Driver != nil {
 		l = m.Driver.Size()
+		n += 1 + l + sovMytaxi(uint64(l))
+	}
+	l = len(m.CreatedAt)
+	if l > 0 {
+		n += 1 + l + sovMytaxi(uint64(l))
+	}
+	l = len(m.UpdatedAt)
+	if l > 0 {
 		n += 1 + l + sovMytaxi(uint64(l))
 	}
 	if m.XXX_unrecognized != nil {
@@ -1672,7 +1827,7 @@ func sovMytaxi(x uint64) (n int) {
 func sozMytaxi(x uint64) (n int) {
 	return sovMytaxi(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
-func (m *EmptyResponse) Unmarshal(dAtA []byte) error {
+func (m *EmptyResp) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1695,10 +1850,10 @@ func (m *EmptyResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: EmptyResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: EmptyResp: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: EmptyResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: EmptyResp: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:
@@ -1912,6 +2067,70 @@ func (m *Driver) Unmarshal(dAtA []byte) error {
 			}
 			m.CarModel = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
+		case 6:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMytaxi
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthMytaxi
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthMytaxi
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.CreatedAt = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 7:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field UpdatedAt", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMytaxi
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthMytaxi
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthMytaxi
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.UpdatedAt = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipMytaxi(dAtA[iNdEx:])
@@ -2091,6 +2310,70 @@ func (m *Client) Unmarshal(dAtA []byte) error {
 			}
 			m.Phone = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
+		case 6:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMytaxi
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthMytaxi
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthMytaxi
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.CreatedAt = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 7:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field UpdatedAt", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMytaxi
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthMytaxi
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthMytaxi
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.UpdatedAt = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipMytaxi(dAtA[iNdEx:])
@@ -2187,6 +2470,38 @@ func (m *OrderReq) Unmarshal(dAtA []byte) error {
 			m.Cost = float32(math.Float32frombits(v))
 		case 3:
 			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Status", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMytaxi
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthMytaxi
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthMytaxi
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Status = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field ClientId", wireType)
 			}
 			var stringLen uint64
@@ -2217,7 +2532,7 @@ func (m *OrderReq) Unmarshal(dAtA []byte) error {
 			}
 			m.ClientId = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
-		case 4:
+		case 5:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field DriverId", wireType)
 			}
@@ -2345,6 +2660,38 @@ func (m *OrderRes) Unmarshal(dAtA []byte) error {
 			m.Cost = float32(math.Float32frombits(v))
 		case 3:
 			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Status", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMytaxi
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthMytaxi
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthMytaxi
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Status = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Client", wireType)
 			}
 			var msglen int
@@ -2379,7 +2726,7 @@ func (m *OrderRes) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			iNdEx = postIndex
-		case 4:
+		case 5:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Driver", wireType)
 			}
@@ -2414,6 +2761,70 @@ func (m *OrderRes) Unmarshal(dAtA []byte) error {
 			if err := m.Driver.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
+			iNdEx = postIndex
+		case 6:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMytaxi
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthMytaxi
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthMytaxi
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.CreatedAt = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 7:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field UpdatedAt", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMytaxi
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthMytaxi
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthMytaxi
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.UpdatedAt = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

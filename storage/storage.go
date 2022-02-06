@@ -16,8 +16,8 @@ type IStorage interface {
 
 type storagePg struct {
 	db         *sqlx.DB
-	clientRepo repo.DriverStorageI
-	driverRepo repo.ClientStorageI
+	clientRepo repo.ClientStorageI
+	driverRepo repo.DriverStorageI
 	orderRepo  repo.OrderStorageI
 }
 

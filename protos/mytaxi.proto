@@ -6,21 +6,21 @@ service MyTaxiService {
     rpc CreateDriver(Driver) returns (Driver);
     rpc GetDriver(ByIdReq) returns (Driver);
     rpc UpdateDriver(Driver) returns (Driver);
-    rpc DeleteDriver(ByIdReq) returns (EmptyResponse);
+    rpc DeleteDriver(ByIdReq) returns (EmptyResp);
 
     rpc CreateClient(Client) returns (Client);
     rpc GetClient(ByIdReq) returns (Client);
     rpc UpdateClient(Client) returns (Client);
-    rpc DeleteClient(ByIdReq) returns (EmptyResponse);
+    rpc DeleteClient(ByIdReq) returns (EmptyResp);
 
     rpc CreateOrder(OrderReq) returns (OrderRes);
     rpc GetOrder(ByIdReq) returns (OrderRes);
     rpc ListOrders(ListOrdersReq) returns (ListOrdersRes);
     rpc UpdateOrder(OrderReq) returns (OrderRes);
-    rpc DeleteOrder(ByIdReq) returns (EmptyResponse);
+    rpc DeleteOrder(ByIdReq) returns (EmptyResp);
 }
 
-message EmptyResponse {}
+message EmptyResp {}
 
 message Driver {
     string Id = 1;
@@ -28,6 +28,8 @@ message Driver {
     string LastName = 3;
     string Phone = 4;
     string CarModel = 5;
+    string CreatedAt = 6;
+    string UpdatedAt = 7;
 }
 
 message Client {
@@ -35,20 +37,26 @@ message Client {
     string FirstName = 2;
     string LastName = 3;
     string Phone = 5;
+    string CreatedAt = 6;
+    string UpdatedAt = 7;
 }
 
 message OrderReq {
     string Id = 1;
     float Cost = 2;
-    string ClientId = 3;
-    string DriverId = 4;
+    string Status = 3;
+    string ClientId = 4;
+    string DriverId = 5;
 }
 
 message OrderRes {
     string Id = 1;
     float Cost = 2;
-    Client Client = 3;
-    Driver Driver = 4;
+    string Status = 3;
+    Client Client = 4;
+    Driver Driver = 5;
+    string CreatedAt = 6;
+    string UpdatedAt = 7;
 }
 
 message ByIdReq {
