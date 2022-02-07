@@ -3,11 +3,12 @@ package service
 import (
 	"context"
 
-	pb "github.com/abdullohsattorov/mytaxi-service/genproto"
-	l "github.com/abdullohsattorov/mytaxi-service/pkg/logger"
 	"github.com/gofrs/uuid"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+
+	pb "github.com/abdullohsattorov/mytaxi-service/genproto"
+	l "github.com/abdullohsattorov/mytaxi-service/pkg/logger"
 )
 
 func (t *MyTaxiService) CreateClient(ctx context.Context, req *pb.Client) (*pb.Client, error) {

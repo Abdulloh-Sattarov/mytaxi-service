@@ -21,8 +21,8 @@ func NewOrderRepo(db *sqlx.DB) *orderRepo {
 func (t *orderRepo) CreateOrder(order pb.OrderReq) (pb.OrderRes, error) {
 	var id string
 	err := t.db.QueryRow(`
-        INSERT INTO orders(id, cost, status, driver_id, client_id, created_at, updated_at)
-        VALUES ($1, $2, $3, $4, $5, $6, $7) returning id`, order.Id, order.Cost, order.Status, order.DriverId, order.ClientId, time.Now().UTC(), time.Now().UTC()).Scan(&id)
+	INSERT INTO orders(id, cost, status, driver_id, client_id, created_at, updated_at)
+	VALUES ($1, $2, $3, $4, $5, $6, $7) returning id`, order.Id, order.Cost, order.Status, order.DriverId, order.ClientId, time.Now().UTC(), time.Now().UTC()).Scan(&id)
 	if err != nil {
 		return pb.OrderRes{}, err
 	}
@@ -88,14 +88,18 @@ func (t *orderRepo) ListOrders(clientId string, page, limit int64) ([]*pb.OrderR
 		count  int64
 	)
 	for rows.Next() {
-		var order pb.OrderRes
-		var driverId, clientId string
-		err = rows.Scan(&order.Id, &order.Status, &order.Cost, &driverId, &clientId, &order.CreatedAt, &order.UpdatedAt)
+		var (
+			order    pb.OrderRes
+			driverId string
+			ClientId string
+		)
+
+		err = rows.Scan(&order.Id, &order.Status, &order.Cost, &driverId, &ClientId, &order.CreatedAt, &order.UpdatedAt)
 		if err != nil {
 			return nil, 0, err
 		}
 
-		client, _ := NewClientRepo(t.db).GetClient(clientId)
+		client, _ := NewClientRepo(t.db).GetClient(ClientId)
 		driver, _ := NewDriverRepo(t.db).GetDriver(driverId)
 
 		order.Client = &client
@@ -139,11 +143,17 @@ func (t *orderRepo) UpdateOrder(order pb.OrderReq) (pb.OrderRes, error) {
 		return pb.OrderRes{}, err
 	}
 
-	order.Status = res.Status
-	order.DriverId = res.Client.Id
-	order.ClientId = res.Client.Id
+	var updated pb.OrderRes
 
-	return pb.OrderRes{}, nil
+	updated.Id = res.Id
+	updated.Cost = res.Cost
+	updated.Status = res.Status
+	updated.Driver = res.Driver
+	updated.Client = res.Client
+	updated.CreatedAt = res.CreatedAt
+	updated.UpdatedAt = res.UpdatedAt
+
+	return updated, nil
 }
 
 func (t *orderRepo) DeleteOrder(id string) error {
